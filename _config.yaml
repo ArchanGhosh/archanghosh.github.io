@@ -1,4 +1,7 @@
-# Author Sidebar Configuration
+title: "Archan Ghosh"
+"remote_theme: mmistakes/minimal-mistakes@4.24.0"
+
+# Sidebar Configuration
 author:
   name: "Archan Ghosh"
   avatar: "/assets/images/profile.jpg"
@@ -19,3 +22,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/archanghosh"
+
+
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-remote-theme
