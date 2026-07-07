@@ -1,19 +1,24 @@
-// Core setup function to bind DOM triggers
+/**
+ * Dark Mode Orchestrator for Archan's Portfolio
+ * State-preserving toggle supporting cross-page continuity.
+ */
+
 function initializeThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
     const toggleIcon = document.getElementById('theme-icon');
     const htmlElement = document.documentElement;
 
+    // Safety check: if the button doesn't exist on this page, exit gracefully
     if (!toggleBtn || !toggleIcon) return;
 
+    // Check localStorage preference or system preference fallback
     const darkStored = localStorage.getItem('theme') === 'dark';
     const systemDark = !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (darkStored || systemDark) {
-        htmlElement.classList.add('dark');
+    // Sync icon state with the current class
+    if (htmlElement.classList.contains('dark')) {
         toggleIcon.className = 'fas fa-sun';
     } else {
-        htmlElement.classList.remove('dark');
         toggleIcon.className = 'fas fa-moon';
     }
 
@@ -31,6 +36,7 @@ function initializeThemeToggle() {
     });
 }
 
+// Ensure the DOM is fully constructed before binding events
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeThemeToggle);
 } else {
