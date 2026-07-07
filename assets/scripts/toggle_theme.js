@@ -1,36 +1,41 @@
-
-
 function initializeThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
     const toggleIcon = document.getElementById('theme-icon');
-    const htmlElement = document.documentElement;
+    
+    const targets = [document.documentElement, document.body];
 
-    if (!toggleBtn || !toggleIcon) return;
-
-    const darkStored = localStorage.getItem('theme') === 'dark';
-    const systemDark = !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (htmlElement.classList.contains('dark')) {
-        toggleIcon.className = 'fas fa-sun';
-    } else {
-        toggleIcon.className = 'fas fa-moon';
+    if (!toggleBtn || !toggleIcon) {
+        console.log("Theme elements not found yet, retrying...");
+        return;
     }
 
-    toggleBtn.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-            htmlElement.classList.remove('dark');
-            toggleIcon.className = 'fas fa-moon';
-            localStorage.setItem('theme', 'light');
-        } else {
-            htmlElement.classList.add('dark');
-            toggleIcon.className = 'fas fa-sun';
-            localStorage.setItem('theme', 'dark');
-        }
-    });
+
+    function applyTheme(isDark) {
+        targets.forEach(el => {
+            if (isDark) {
+                el.classList.add('dark');
+                el.setAttribute('data-theme', 'dark'); 
+            } else {
+                el.classList.remove('dark');
+                el.removeAttribute('data-theme');
+            }
+        });
+        toggleIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+
+    const hasDarkClass = document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
+    applyTheme(hasDarkClass);
+
+
+    toggleBtn.onclick = function() {
+        const isNowDark = !document.documentElement.classList.contains('dark');
+        applyTheme(isNowDark);
+        localStorage.setItem('theme', isNowDark ? 'dark' : 'light');
+    };
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeThemeToggle);
-} else {
-    initializeThemeToggle();
-}
+
+window.addEventListener('load', initializeThemeToggle);
+document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+setTimeout(initializeThemeToggle, 500); // Fail-safe microsecond execution backup
