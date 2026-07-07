@@ -1,0 +1,21 @@
+# Author Sidebar Configuration
+author:
+  name: "Archan Ghosh"
+  avatar: "/assets/images/profile.jpg"
+  bio: "ML Engineer and Wannabe Researcher"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:gharchan@gmail.com"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ArchanGhosh"
+    - label: "Google Scholar"
+      icon: "fas fa-fw fa-graduation-cap"
+      url: "https://scholar.google.com/citations?user=eCcjc2gAAAAJ"
+    - label: "Kaggle"
+      icon: "fab fa-fw fa-kaggle"
+      url: "https://www.kaggle.com/archanghosh"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/archanghosh"
